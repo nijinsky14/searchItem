@@ -28,6 +28,18 @@ class SearchCases(unittest.TestCase):
         driver.close()
         driver.quit()
 
+    def test_search_find_tshirts(self):
+        driver = webdriver.Chrome('chromedriver.exe')
+        driver.get('http://automationpractice.com/index.php')
+        driver.find_element_by_id('search_query_top').send_keys('t-shirt')
+        driver.find_element_by_name('submit_search').click()
+        time.sleep(2)
+        result = driver.find_element_by_xpath('//*[@id="center_column"]/h1/span[1]').text
+        expected_result = 'T-SHIRT'
+        self.assertTrue(expected_result in result)
+        driver.close()
+        driver.quit()    
+
 
 if __name__ == '__main__':
     unittest.main()
